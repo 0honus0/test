@@ -35,6 +35,5 @@ while(lis<=maxnumber):
     os.system(com)
     lis+=1
     print('wait')
-    sleep(20)
-
-    #sleep(1200)
+    #sleep(20)
+    sleep(1200)
