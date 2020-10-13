@@ -16,13 +16,11 @@ for data in res:
             maxnumber=shu
 print(maxnumber)
 
-os.system('wget https://raw.githubusercontent.com/0honus0/test/main/screen.py')
+os.popen('wget https://raw.githubusercontent.com/0honus0/test/main/screen.py')
 while(lis<=maxnumber):
-    print('第',lis,'个')
+    print('now:'+str(lis))
     sleep(2)
-    if lis==0:
-        com='sed -i s/change_this_number/0/g /root/screen.py'
-    else:
+    if lis>0:
         com='sed -i s/lis='+str(lis-1)+'/lis='+str(lis)+'/g /root/screen.py'
     print(com)
     os.system(com)

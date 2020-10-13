@@ -1,7 +1,7 @@
 import os
 from time import sleep
 
-lis=change_this_number
+lis=0
 if lis==0:
     os.environ['BTFS_PATH'] = '/root/.btfs'
 else:
