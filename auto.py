@@ -27,11 +27,12 @@ while(lis<=maxnumber):
     print(com)
     os.system(com)
     if lis==0:
-        com='screen -S btfs'
+        com='screen -dmS btfs'
     else:
         com='screen -S btfs'+str(lis)
     print(com)
     com='python3 /root/screen.py'
+    os.system(com)
     lis+=1
     print('wait')
     sleep(20)
