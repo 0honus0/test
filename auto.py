@@ -22,8 +22,8 @@ while(lis<=maxnumber):
     sleep(2)
     if lis>0:
         com='sed -i s/lis='+str(lis-1)+'/lis='+str(lis)+'/g /root/screen.py'
-    print(com)
-    os.system(com)
+        print(com)
+        os.system(com)
     if lis==0:
         com='screen -dmS btfs python3 /root/screen.py'
     else:
