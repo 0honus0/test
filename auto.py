@@ -16,7 +16,7 @@ for data in res:
             maxnumber=shu
 print(maxnumber)
 
-os.system('wget https://raw.githubusercontent.com/0honus0/test/master/screen.py')
+os.system('wget https://raw.githubusercontent.com/0honus0/test/main/screen.py')
 while(lis<=maxnumber):
     print('第',lis,'个')
     sleep(2)
