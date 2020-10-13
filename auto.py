@@ -32,7 +32,7 @@ while(lis<=maxnumber):
         com='screen -dmS btfs'+str(lis)+' python3 /root/screen.py'
     print(com)
     # com='python3 /root/screen.py'
-    # os.system(com)
+    os.system(com)
     lis+=1
     print('wait')
     sleep(20)
