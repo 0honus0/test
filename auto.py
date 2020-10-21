@@ -1,7 +1,7 @@
 import os
 from time import sleep
 
-lis=1
+lis=0
 maxnumber=0
 res=os.popen('ls')
 for data in res:
