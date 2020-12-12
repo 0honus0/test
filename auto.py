@@ -34,4 +34,4 @@ while(lis<=maxnumber):
     lis+=1
     print('wait')
     #sleep(20)
-    sleep(60)
+    sleep(5)
