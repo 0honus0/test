@@ -26,7 +26,7 @@ tables = excel.add_sheet('ipv6')
 
 tables=excel.get_sheet(0)
 tables.write(0, 0, 'ip')
-tables.write(0, 1, 'password')
+tables.write(0, 1, 'lis')
 tables.write(0, 2, 'status')
 
 while row > i:
@@ -99,7 +99,6 @@ while row > i:
         while lis < maxnumber+1:
             try:
                 print(str(lis)+'/'+str(maxnumber))
-
                 if lis==0:
                     command='cat .btfs/config'
                 else:
@@ -119,6 +118,18 @@ while row > i:
                 jieshu='1:2:3:'+str(lis+1)
                 tihuan=kaishi+jieshu
                 print(tihuan)
+                command='cat /proc/net/dev | awk \'{i++; if(i>2){print $1}}\' | sed \'s/^[\t]*//g\' | sed \'s/[:]*$//g\''
+                stdin, stdout, stderr = client.exec_command(command)
+                wangka=stdout.readlines()
+                #print(wangka)
+                for data in wangka:
+                    data=data.replace('\n','')
+                    if data!='lo' and data!='':
+                        wang=data
+                command='ifconfig '+str(wang)+' inet6 add '+tihuan+'/64 up'
+                print(command)
+                stdin, stdout, stderr = client.exec_command(command)
+                sleep(1)
                 chan = client.invoke_shell()
                 if lis==0:
                     command='export BTFS_PATH=/root/.btfs\n'
