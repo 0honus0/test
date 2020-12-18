@@ -23,7 +23,7 @@ for data in res:
             maxnumber=shu
 
 if maxnumber-1>=more:
-    print('已存在'+str(maxnumber)+'个应用')
+    print('exist'+str(maxnumber))
     os._exit(0)
 
 while more-maxnumber>1:
@@ -55,9 +55,9 @@ while more-maxnumber>1:
         if data.find(pat)!=-1 and find is False:
             find=True
     if find is False:
-        print('copy失败!!!')
+        print('copy failed!!!')
     else:
-        print('copy成功')
+        print('copy success')
 
     suc=False
     test_test=3
@@ -71,7 +71,7 @@ while more-maxnumber>1:
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         client.connect(ip, port, username=username, password=password,timeout=30)
     except:
-        print('连接失败')
+        print('con fail')
 
     while suc is False and (test_test != 0):
         chan = client.invoke_shell()
@@ -93,19 +93,19 @@ while more-maxnumber>1:
             if data.find(pat)!=-1:
                 suc=True
         if suc:
-            print("btfs"+str(maxnumber+1)+" init成功")
+            print("btfs"+str(maxnumber+1)+" init suc")
         elif test_test!=0:
-            print("初始化失败,重试")
+            print("init fail.re")
             test_test=test_test-1
         elif test_test==0:
-            print('失败')
+            print('fail')
 
     chenggong=False
     test_test=3
     while (chenggong is False) and (test_test!=0):
         chan.send('btfs config profile apply storage-host\n')
         sleep(5)
-        print("执行btfs config profile apply storage-host中...")
+        print("btfs config profile apply storage-host...")
 
         command=('ls .btfs'+str(maxnumber+1)+'/ -a')
         test_test-=1
@@ -113,7 +113,7 @@ while more-maxnumber>1:
         results = os.popen(command).readlines()
         for date in results:
             if date.find('config-pre-storage-host')!=-1:
-                print('执行apply成功')
+                print('carry apply suc')
                 chenggong=True
 
     command='apt-get -y install screen'
@@ -193,7 +193,7 @@ while more-maxnumber>1:
     chan.send('btfs daemon\n')
     sleep(4)
 
-    print("完成")
+    print("OK")
 
     command='ls'
     res=os.popen(command).readlines()
@@ -222,9 +222,9 @@ while more-maxnumber>1:
         if data.find(pat)!=-1 and find is False:
             find=True
     if find is False:
-        print('copy失败!!!')
+        print('copy fail!!!')
     else:
-        print('copy成功')
+        print('copy suc')
 
     suc=False
     test_test=3
@@ -249,26 +249,26 @@ while more-maxnumber>1:
             if data.find(pat)!=-1:
                 suc=True
         if suc:
-            print("btfs"+str(maxnumber+end-1)+" init成功")
+            print("btfs"+str(maxnumber+end-1)+" init suc")
         elif test_test!=0:
-            print("初始化失败,重试")
+            print("init fail,again")
             test_test=test_test-1
         elif test_test==0:
-            print('失败')
+            print('fail')
 
     chenggong=False
     test_test=3
     while (chenggong is False) and (test_test>0):
         chan.send('btfs config profile apply storage-host\n')
         sleep(5)
-        print("执行btfs config profile apply storage-host中...")
+        print("carry btfs config profile apply storage-host...")
         command=('ls .btfs'+str(maxnumber+end-1)+'/ -a')
         test_test-=1
         #print(command)
         results = os.popen(command).readlines()
         for date in results:
             if date.find('config-pre-storage-host')!=-1:
-                print('执行apply成功')
+                print('carry apply suc')
                 chenggong=True
 
     command='apt-get -y install screen'
@@ -364,7 +364,6 @@ while more-maxnumber>1:
     chan.send('btfs daemon\n')
     sleep(4)
 
-    # print("开始后台执行。。。")
-    print("完成")
+    print("over")
 
     #more=more-1
