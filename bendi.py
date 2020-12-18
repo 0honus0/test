@@ -2,10 +2,8 @@ import re,os
 from time import sleep
 import sys
 import paramiko
-i=0
 more=65           #数量-1为实际增加次数，比如要多开64个设置more为65
 end=more
-max=255
 max_test=3
 
 
@@ -22,7 +20,7 @@ for data in res:
             shu=0
         else:
             shu=int(shu)
-        if (shu > maxnumber) and op==shu and shu<=(more-1):
+        if (shu > maxnumber) and shu<=(more-1):
             maxnumber=shu
 
 if maxnumber-1>=more:
@@ -43,7 +41,7 @@ while more-maxnumber>1:
                 shu=0
             else:
                 shu=int(shu)
-            if (shu > maxnumber) and op==shu and (shu<=(more-1)):
+            if (shu > maxnumber) and (shu<=(more-1)):
                 maxnumber=shu
     print(maxnumber)
     command='cp -r btfs btfs'+str(maxnumber+1)
@@ -212,7 +210,7 @@ while more-maxnumber>1:
                 shu=0
             else:
                 shu=int(shu)
-            if (shu > maxnumber) and op==shu and (shu<=(more-1)):
+            if (shu > maxnumber) and (shu<=(more-1)):
                 maxnumber=shu
     print(maxnumber)
     command='cp -r btfs btfs'+str(maxnumber+end-1)
@@ -374,6 +372,3 @@ while more-maxnumber>1:
     print("完成")
 
     #more=more-1
-max=0
-i=i+1
-success=False
