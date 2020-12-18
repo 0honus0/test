@@ -3,7 +3,7 @@ from time import sleep
 import sys
 import paramiko
 i=0
-more=4           #数量-1为实际增加次数，比如要多开64个设置more为65
+more=65           #数量-1为实际增加次数，比如要多开64个设置more为65
 end=more
 max=255
 max_test=3
