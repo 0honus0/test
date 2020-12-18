@@ -2,6 +2,7 @@ import re,os
 from time import sleep
 import sys
 import paramiko
+
 more=65           #数量-1为实际增加次数，比如要多开64个设置more为65
 end=more
 max_test=3
@@ -10,17 +11,15 @@ max_test=3
 
 res=os.popen('ls').readlines()
 maxnumber=0
-op=-1
 for data in res:
     geshu=data.find('btfs')
     shu=data.replace('btfs','').replace('\n','')
     if geshu!=-1:
-        op+=1
         if shu=='':
             shu=0
         else:
             shu=int(shu)
-        if (shu > maxnumber) and shu<=(more-1):
+        if (shu > maxnumber) and shu<=(end-1):
             maxnumber=shu
 
 if maxnumber-1>=more:
@@ -28,15 +27,14 @@ if maxnumber-1>=more:
     os._exit(0)
 
 while more-maxnumber>1:
-    command='ls'
+    command='ls -a'
     res=os.popen(command).readlines()
     maxnumber=0
-    op=-1
     for data in res:
         geshu=data.find('btfs')
         shu=data.replace('.btfs','').replace('btfs','').replace('\n','')
         if geshu!=-1:
-            op+=1
+            print(shu)
             if shu=='':
                 shu=0
             else:
@@ -200,12 +198,10 @@ while more-maxnumber>1:
     command='ls'
     res=os.popen(command).readlines()
     maxnumber=0
-    op=-1
     for data in res:
         geshu=data.find('btfs')
         shu=data.replace('.btfs','').replace('btfs','').replace('\n','')
         if geshu!=-1:
-            op+=1
             if shu=='':
                 shu=0
             else:
