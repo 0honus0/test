@@ -45,6 +45,7 @@ tables.write(0, 16, 'APIport')
 tables.write(0, 17, 'Gatewayport')
 tables.write(0, 18, 'RemoteAPIport')
 tables.write(0, 19, 'Swarmport')
+tables.write(0, 20, 'running status')
 while row > i:
     count=0
     success=False
@@ -490,13 +491,14 @@ while row > i:
                     tables.write(begin+1, 2, lis)
                     tables.write(begin+1, 9,'runfailed')
                 print("完成")
+                tables.write(begin+1,20,'runsuc')
                 mingzi=time+".xls"
                 print(mingzi)
                 excel.save(mingzi)
                 begin=begin+1
                 lis=lis+1
             except:
-                tables.write(begin+1,10,'runInterrupt')
+                tables.write(begin+1,20,'runInterrupt')
                 begin=begin+1
                 lis=lis+1
                 mingzi=time+".xls"
