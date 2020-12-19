@@ -136,7 +136,7 @@ while more-maxnumber>1:
     newport=int(float(duankou))+1      #5001
     newadd=newport-5001
     newport1=8080+newadd        #8080
-    newport2=5101+newadd        #5101
+    newport2=6101+newadd        #6101
     newport3=4001+newadd        #4001
     print(newport)
     print(newport1)
