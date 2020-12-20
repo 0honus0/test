@@ -289,9 +289,9 @@ while more-maxnumber>1:
             duankou=duankou[27:len(data)-1]
     print(duankou)
     try:
-        newport=int(float(duankou))+1      #5001
+        newport=int(float(duankou))+end-1      #5001
     except:
-        newport=int(5001+maxnumber+end)    #5001
+        newport=int(5001+maxnumber+end-1)    #5001
     print('newport is '+str(newport))
     newadd=newport-5001
     newport1=8080+newadd        #8080
