@@ -82,7 +82,7 @@ while more-maxnumber>1:
         chan.send('export PATH=${PATH}:${HOME}/btfs'+str(maxnumber+1)+'/bin\n')
         sleep(2)
         chan.send('btfs init\n')
-        sleep(2)
+        sleep(4)
 
         command='ls -a'
         results = os.popen(command).readlines()
@@ -121,7 +121,7 @@ while more-maxnumber>1:
     sleep(2)
 
     if maxnumber==0:
-        command=command='cat .btfs/config'
+        command='cat .btfs/config'
     else:
         command='cat .btfs'+str(maxnumber)+'/config'
     print(command)
