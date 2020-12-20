@@ -133,7 +133,10 @@ while more-maxnumber>1:
             duankou=re.search(pat,data).group()
             duankou=duankou[27:len(data)-1]
     print(duankou)
-    newport=int(float(duankou))+1      #5001
+    try:
+        newport=int(float(duankou))+1      #5001
+    except:
+        newport=int(5001+maxnumber+1)
     newadd=newport-5001
     newport1=8080+newadd        #8080
     newport2=6101+newadd        #6101
@@ -237,7 +240,7 @@ while more-maxnumber>1:
         chan.send('export PATH=${PATH}:${HOME}/btfs'+str(maxnumber+end-1)+'/bin\n')
         sleep(2)
         chan.send('btfs init\n')
-        sleep(4)
+        sleep(2)
 
         command='ls -a'
         results = os.popen(command).readlines()
@@ -285,7 +288,10 @@ while more-maxnumber>1:
             duankou=re.search(pat,data).group()
             duankou=duankou[27:len(data)-1]
     print(duankou)
-    newport=int(float(duankou))+end-1    #5001
+    try:
+        newport=int(float(duankou))+end-1      #5001
+    except:
+        newport=int(5001+maxnumber+end-1)    #5001
     print('newport is '+str(newport))
     newadd=newport-5001
     newport1=8080+newadd        #8080
