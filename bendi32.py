@@ -150,7 +150,7 @@ while more-maxnumber>1:
 
         chan.send('btfs init\n')
 
-        sleep(2)
+        sleep(4)
 
         command='ls -a'
 
@@ -216,7 +216,7 @@ while more-maxnumber>1:
 
     if maxnumber==0:
 
-        command=command='cat .btfs/config'
+        command='cat .btfs/config'
 
     else:
 
@@ -436,7 +436,7 @@ while more-maxnumber>1:
 
         chan.send('btfs init\n')
 
-        sleep(2)
+        sleep(4)
 
         command='ls -a'
 
