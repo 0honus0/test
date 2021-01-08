@@ -1,3 +1,4 @@
+import os,re
 command='curl ifconfig.me'
 ip=os.popen(command).readlines()
 ip=ip[0].split('.')
