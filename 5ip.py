@@ -47,7 +47,7 @@ net=result.replace('iface ','').replace(' inet','').replace(' static','')
 print(net)
 
 #检查是否添加配置文件
-for i in result:
+for i in lis:
     command='ip address add '+i+'/29 dev '+str(net)
     print(command)
     result=os.popen(command)
