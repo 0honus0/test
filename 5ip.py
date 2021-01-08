@@ -1,5 +1,13 @@
+'''
+Author: your name
+Date: 2021-01-08 14:58:17
+LastEditTime: 2021-01-08 20:27:23
+LastEditors: Please set LastEditors
+Description: In User Settings Edit
+FilePath: \python\project\new\5ip.py
+'''
 import paramiko
-import os
+import os,re
 from time import sleep
 
 #获取5ip
@@ -29,31 +37,18 @@ def GetIP(number,lis):
 
 
 #获取网卡名称
-command='cat /proc/net/dev | awk \'{i++; if(i>2){print $1}}\' | sed \'s/^[\t]*//g\' | sed \'s/[:]*$//g\''
+command='cat /etc/network/interfaces'
 net=os.popen(command).readlines()
-n=0
-for i in net:
-    i=i.replace('\n','')
-    net[n]=i
-    n+=1
-net.remove('lo')
-netname=net[0][0:-1]
-netname=netname+'1'
-print(netname)
+net=''.join(net)
+net=net[20:-1]
+pat='iface [\s\S]*? inet static'
+result=re.search(pat,net).group()
+net=result.replace('iface ','').replace(' inet','').replace(' static','')
+print(net)
 
 #检查是否添加配置文件
-command='cat /etc/network/interfaces'
-result=os.popen(command).readlines()
-result=''.join(result)
-for i in lis:
-    print(i)
-    if i in result:
-        print('exist')
-        continue
-    command='sed -i \'$a iface '+netname+' inet static\' /etc/network/interfaces'
-    print(command)
-    result=os.popen(command)
-    command='sed -i \'$a \ \ \ \ \ \ \ \ address '+i+'/29\'  /etc/network/interfaces'
+for i in result:
+    command='ip address add '+i+'/29 dev '+str(net)
     print(command)
     result=os.popen(command)
 
@@ -108,5 +103,5 @@ while count<=maxnumber:
     command="btfs config --json Addresses.Swarm '[\"/ip4/"+str(ip)+"/tcp/"+str(port)+"\""+",\"/ip4/"+str(ip)+"/udp/"+str(port)+"/quic\"]'"+"\n"
     print(command)
     chan.send(command)
-    sleep(3)
+    sleep(2)
     count+=1
