@@ -92,10 +92,14 @@ while count<=maxnumber:
     chan = client.invoke_shell()
     chan.send('cd /root\n')
     sleep(1)
-    chan.send('export BTFS_PATH=/root/.btfs'+str(count)+'\n')
-    sleep(1)
-    chan.send('export PATH=${PATH}:${HOME}/btfs'+str(count)+'/bin\n')
-    sleep(1)
+    command='export BTFS_PATH=/root/.btfs'+str(count)+'\n'
+    print(command)
+    chan.send(command)
+    sleep(2)
+    command='export PATH=${PATH}:${HOME}/btfs'+str(count)+'/bin\n'
+    print(command)
+    chan.send(command)
+    sleep(2)
     ip=GetIP(count,lis)
     port=oldport+count
     print('begin...')
