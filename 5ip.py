@@ -108,5 +108,5 @@ while count<=maxnumber:
     command="btfs config --json Addresses.Swarm '[\"/ip4/"+str(ip)+"/tcp/"+str(port)+"\""+",\"/ip4/"+str(ip)+"/udp/"+str(port)+"/quic\"]'"+"\n"
     print(command)
     chan.send(command)
-    sleep(1)
+    sleep(3)
     count+=1
