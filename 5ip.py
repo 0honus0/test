@@ -88,7 +88,7 @@ except:
     print('con fail')
 
 count=1
-while count<=10:
+while count<=maxnumber:
     chan = client.invoke_shell()
     chan.send('cd /root\n')
     sleep(1)
