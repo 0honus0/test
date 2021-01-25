@@ -40,6 +40,7 @@ while(True):
         os.system(command)
         command='wget https://raw.githubusercontent.com/0honus0/test/main/auto.py'
         os.system(command)
+        sleep(60)
         os.system('screen -dmS run python3 /root/auto.py')
         print('后台重启中。。。')
         count=3600
