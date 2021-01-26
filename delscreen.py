@@ -11,7 +11,7 @@ while(True):
     print('swap used:'+str(res[2])+'/'+str(res[1]))
     if int(res[2])>1024:
         print(gettime())
-        print('begin del screen。。。')
+        print('begin del screen...')
         command='ls /root'
         res=os.popen(command).readlines()
         maxnumber=0
@@ -32,8 +32,8 @@ while(True):
         for i in range(1,maxnumber+1):
             command='screen -S btfs'+str(i)+'  -X quit'
             os.popen(command)
-        print('completed。。。')
-        print('begin reboot btfs。。。')
+        print('completed...')
+        print('begin reboot btfs...')
         command='rm -rf screen.py'
         os.system(command)
         command='rm -rf auto.py'
@@ -42,7 +42,7 @@ while(True):
         os.system(command)
         sleep(60)
         os.system('screen -dmS run python3 /root/auto.py')
-        print('rebooting。。。')
+        print('rebooting...')
         count=3600
         while count>0:
             sleep(1)
