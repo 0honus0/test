@@ -8,10 +8,10 @@ def gettime():
 while(True):
     command='free -m'
     res=os.popen(command).readlines()[2].split()
-    print('swap占用:'+str(res[2])+'/'+str(res[1]))
+    print('swap used:'+str(res[2])+'/'+str(res[1]))
     if int(res[2])>1024:
         print(gettime())
-        print('开始删除screen。。。')
+        print('begin del screen。。。')
         command='ls /root'
         res=os.popen(command).readlines()
         maxnumber=0
@@ -32,8 +32,8 @@ while(True):
         for i in range(1,maxnumber+1):
             command='screen -S btfs'+str(i)+'  -X quit'
             os.popen(command)
-        print('删除完成。。。')
-        print('开始重启btfs。。。')
+        print('completed。。。')
+        print('begin reboot btfs。。。')
         command='rm -rf screen.py'
         os.system(command)
         command='rm -rf auto.py'
@@ -42,18 +42,18 @@ while(True):
         os.system(command)
         sleep(60)
         os.system('screen -dmS run python3 /root/auto.py')
-        print('后台重启中。。。')
+        print('rebooting。。。')
         count=3600
         while count>0:
             sleep(1)
             count=count-1
-            print('\r' + 'sleep中:'+str(3600-count)+'/'+str(3600), end='', flush=True)
+            print('\r' + 'sleeping:'+str(3600-count)+'/'+str(3600), end='', flush=True)
     else:
         print(gettime())
-        print("正常")
+        print("normal")
         count=3600
         while count>0:
             sleep(1)
             count=count-1
-            print('\r' + 'sleep中:'+str(3600-count)+'/'+str(3600), end='', flush=True)
+            print('\r' + 'sleeping:'+str(3600-count)+'/'+str(3600), end='', flush=True)
 
