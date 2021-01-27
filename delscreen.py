@@ -1,7 +1,7 @@
 import os
 from time import sleep
 import time
-
+import re
 def gettime():
     return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
@@ -9,7 +9,7 @@ while(True):
     command='free -m'
     res=os.popen(command).readlines()[2].split()
     print('swap used:'+str(res[2])+'/'+str(res[1]))
-    if int(res[2])>1024:
+    if int(res[2])>100:
         print(gettime())
         print('begin del screen...')
         command='ls /root'
@@ -33,6 +33,20 @@ while(True):
             command='screen -S btfs'+str(i)+'  -X quit'
             os.popen(command)
         print('completed...')
+        print('two...')
+        port=4000
+        for i in range(1,maxnumber+1):
+            command='netstat -nap | grep '+str(port+i)
+            res=os.popen(command).readlines()
+            for k in res:
+                k=k.split()
+                k=k[6]
+                pat='\d{1,5}'
+                pid=re.search(pat,k).group()
+                command='kill -9 '+str(pid)
+                os.system(command)
+                print('kill pid:'+str(pid))
+            print('port '+str(port+i)+' free')
         print('begin reboot btfs...')
         command='rm -rf screen.py'
         os.system(command)
@@ -56,4 +70,3 @@ while(True):
             sleep(1)
             count=count-1
             print('\r' + 'sleeping:'+str(3600-count)+'/'+str(3600), end='', flush=True)
-
