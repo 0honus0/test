@@ -9,7 +9,7 @@ while(True):
     command='free -m'
     res=os.popen(command).readlines()[2].split()
     print('swap used:'+str(res[2])+'/'+str(res[1]))
-    if int(res[2])>100:
+    if int(res[2])>1024:
         print(gettime())
         print('begin del screen...')
         command='ls /root'
