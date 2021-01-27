@@ -42,15 +42,20 @@ while(True):
                 k=k.split()
                 k=k[6]
                 pat='\d{1,5}'
-                pid=re.search(pat,k).group()
-                command='kill -9 '+str(pid)
-                os.system(command)
-                print('kill pid:'+str(pid))
+                try:
+                    pid=re.search(pat,k).group()
+                    command='kill -9 '+str(pid)
+                    os.system(command)
+                    print('kill pid:'+str(pid))
+                except:
+                    continue
             print('port '+str(port+i)+' free')
         print('begin reboot btfs...')
         command='rm -rf screen.py'
         os.system(command)
         command='rm -rf auto.py'
+        os.system(command)
+        command='rm -rf wget-log'
         os.system(command)
         command='wget https://raw.githubusercontent.com/0honus0/test/main/auto.py'
         os.system(command)
