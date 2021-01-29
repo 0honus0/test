@@ -33,7 +33,7 @@ tables.write(0, 4, 'PeerID')
 tables.write(0, 5, 'PrivKey')
 tables.write(0, 6, 'Score')
 tables.write(0, 7, 'BttWalletBalance')
-tables.write(0, 8, 'Storage_disk_available')
+tables.write(0, 8, 'Storage_used')
 tables.write(0, 9, 'Uptime')
 tables.write(0, 10, 'running status')
 while row > i:
@@ -186,7 +186,7 @@ while row > i:
                         Score=re.search(pat,data)
                         if Score!=None:
                             Score=Score.group(0)
-                        pat1='"storage_disk_available":[0-9]+([.]{1}[0-9]+){0,1}'
+                        pat1='"storage_used":[0-9]+([.]{1}[0-9]+){0,1}'
                         Storage_disk_available=re.search(pat1,data)
                         if Storage_disk_available!=None:
                             Storage_disk_available=Storage_disk_available.group(0)
@@ -228,7 +228,7 @@ while row > i:
                     print(Uptime[:])
                     tables.write(begin+1,6,Score[8:])
                     tables.write(begin+1,7,BttWalletBalance[19:])
-                    tables.write(begin+1,8,int(Storage_disk_available[25:])/1024/1024/1024)
+                    tables.write(begin+1,8,int(Storage_disk_available[15:])/1024/1024/1024)
                     tables.write(begin+1,9, Uptime[9:])
                 # 8 19 25
                 if flag is False:
