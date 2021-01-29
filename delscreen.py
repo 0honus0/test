@@ -4,8 +4,8 @@ import time
 import re
 def gettime():
     return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-try:
-    while(True):
+
+while(True):
     command='free -m'
     res=os.popen(command).readlines()[2].split()
     print('swap used:'+str(res[2])+'/'+str(res[1]))
@@ -78,5 +78,3 @@ try:
             sleep(1)
             count=count-1
             print('\r' + 'sleeping:'+str(3600-count)+'/'+str(3600), end='', flush=True)
-except:
-    pass
