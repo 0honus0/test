@@ -90,7 +90,7 @@ while row > i:
                     maxnumber=shu
         print(maxnumber)
 
-        lis=0
+        lis=1
         while lis < maxnumber+1:
             try:
                 Score=''
@@ -228,7 +228,7 @@ while row > i:
                     print(Uptime[:])
                     tables.write(begin+1,6,Score[8:])
                     tables.write(begin+1,7,BttWalletBalance[19:])
-                    tables.write(begin+1,8,int(Storage_disk_available[15:])/1024/1024/1024)
+                    tables.write(begin+1,8,int(Storage_disk_available[15:])/1024/1024)
                     tables.write(begin+1,9, Uptime[9:])
                 # 8 19 25
                 if flag is False:
