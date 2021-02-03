@@ -32,13 +32,17 @@ tables.write(0, 3, 'Mnemonic')
 tables.write(0, 4, 'PeerID')
 tables.write(0, 5, 'PrivKey')
 tables.write(0, 6, 'Score')
-tables.write(0, 7, 'BttWalletBalance')
-tables.write(0, 8, 'Storage_used')
-tables.write(0, 9, 'Uptime')
-tables.write(0, 10, 'running status')
+tables.write(0, 7, 'Storage_used')
+tables.write(0, 8, 'Uptime')
+tables.write(0, 9, 'running status')
+tables.write(0, 10, 'used')
+
+
 while row > i:
     count=0
     success=False
+
+
     while count < max_test and not success:
         try:
             username='root'
@@ -58,7 +62,7 @@ while row > i:
             if count == max_test-1:
                 tables.write(begin+1,0,ip)
                 tables.write(begin+1,1,password)
-                tables.write(begin+1,10,'loginfailed')
+                tables.write(begin+1,9,'loginfailed')
                 mingzi=time+".xls"
                 print(mingzi)
                 excel.save(mingzi)
@@ -89,12 +93,18 @@ while row > i:
                 if shu > maxnumber:
                     maxnumber=shu
         print(maxnumber)
-
+        try:
+            command='free -m'
+            stdin,stdout,stderr=client.exec_command(command)
+            res=stdout.readlines()
+            res=res[1].split()
+            tables.write(begin+1,10,str(res[2])+'/'+str(res[1]))
+        except:
+            pass
         lis=1
         while lis < maxnumber+1:
             try:
                 Score=''
-                BttWalletBalance=''
                 Storage_disk_available=''
                 Uptime=''
                 print(str(lis)+'/'+str(maxnumber))
@@ -196,55 +206,36 @@ while row > i:
                         if Uptime!=None:
                             Uptime=re.search(pat7,data).group(0)
                     else:
-                        tables.write(begin+1,10,'getScorefailed')
+                        tables.write(begin+1,9,'getScorefailed')
                         mingzi=time+".xls"
                         excel.save(mingzi)
                         print('数据为空')
                         lis=lis+1
                         begin=begin+1
                         continue
-                    chan.send('btfs wallet balance\n')
-                    sleep(8)
-                    result=bytes.decode(chan.recv(3000))
-                    print(result)
-                    data=result
-                    if 'BttWalletBalance' in data:
-                        pat='"BttWalletBalance":[0-9]+([.]{1}[0-9]+){0,1}'
-                        BttWalletBalance=re.search(pat,data)
-                        if BttWalletBalance!=None:
-                            BttWalletBalance=BttWalletBalance.group(0)
-                    else:
-                        tables.write(begin+1,10,'getBttWalletfailed')
-                        print('数据为空')
-                        mingzi=time+'.xls'
-                        excel.save(mingzi)
-                        lis=lis+1
-                        begin=begin+1
-                        continue
                     print('start')
                     print(Score[:])
-                    print(BttWalletBalance[:])
                     print(Storage_disk_available[:])
                     print(Uptime[:])
                     tables.write(begin+1,6,Score[8:])
-                    tables.write(begin+1,7,BttWalletBalance[19:])
-                    tables.write(begin+1,8,int(Storage_disk_available[15:])/1024/1024)
-                    tables.write(begin+1,9, Uptime[9:])
+                    tables.write(begin+1,7,int(Storage_disk_available[15:])/1024/1024)
+                    tables.write(begin+1,8, Uptime[9:])
                 # 8 19 25
                 if flag is False:
                     tables.write(begin+1, 0,ip)
                     tables.write(begin+1, 1,password)
                     tables.write(begin+1, 2, lis)
                     tables.write(begin+1, 9,'runfailed')
+                    continue
                 print("完成")
-                tables.write(begin+1,10,'runsuc')
+                tables.write(begin+1,9,'runsuc')
                 mingzi=time+".xls"
                 print(mingzi)
                 excel.save(mingzi)
                 begin=begin+1
                 lis=lis+1
             except:
-                tables.write(begin+1,10,'runInterrupt')
+                tables.write(begin+1,9,'runInterrupt')
                 begin=begin+1
                 lis=lis+1
                 mingzi=time+".xls"
