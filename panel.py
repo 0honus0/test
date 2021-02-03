@@ -10,7 +10,7 @@ data=xlrd.open_workbook("./data.xls",formatting_info=True)
 table=data.sheets()[0]
 ip_List=table.col_values(0)                 #List
 password_List=table.col_values(1)           #List
-
+name_List=table.col_values(2)
 row=table.nrows
 
 i=0
@@ -25,6 +25,7 @@ while i<row:
             port= 22
             ip=ip_List[i]
             password=password_List[i]
+            name=name_List[i]
             print(ip)
             print(password)
             print('当前在第'+str(i+1)+'个')
@@ -49,15 +50,15 @@ while i<row:
         print('连接成功')
         url='http://209.126.9.94/api/server'
         cookies={'nezha-dashboard': '533603f31d1f3e8c9074a42f05b7204f'}
-        data={"name":ip}
+        data={"name":name}
         res=requests.post(url=url,cookies=cookies,data=json.dumps(data))
         res=json.loads(res.text)
         if str(res['code'])!='200':
             print('cookies失效')
-            #break
+            break
         url='http://209.126.9.94/server'
         res=requests.get(url=url,cookies=cookies).text
-        code=res.find(ip)
+        code=res.find(name)
         code=res[code+20:code+200].split()
         code=code[2].replace('<td>','').replace('</td>','')
         command='mkdir -p /opt/nezha/agent'
