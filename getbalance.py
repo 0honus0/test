@@ -14,7 +14,7 @@ begin=0
 
 time=time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
 print(time)
-data=xlrd.open_workbook("./data.xls",formatting_info=True)
+data=xlrd.open_workbook("./all.xls",formatting_info=True)
 table=data.sheets()[0]
 ip_List=table.col_values(0)                 #List
 password_List=table.col_values(1)           #List
@@ -36,6 +36,7 @@ tables.write(0, 7, 'Storage_used')
 tables.write(0, 8, 'Uptime')
 tables.write(0, 9, 'running status')
 tables.write(0, 10, 'used')
+tables.write(0, 11, 'screen')
 
 
 while row > i:
@@ -99,6 +100,17 @@ while row > i:
             res=stdout.readlines()
             res=res[1].split()
             tables.write(begin+1,10,str(res[2])+'/'+str(res[1]))
+        except:
+            pass
+        try:
+            command='screen -ls'
+            stdin,stdout,stderr=client.exec_command(command)
+            res=stdout.readlines()
+            countbtfs=0
+            for name in res:
+                if 'btfs' in name:
+                    countbtfs+=1
+            tables.write(begin+1,11,countbtfs)
         except:
             pass
         lis=1
