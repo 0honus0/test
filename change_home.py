@@ -69,18 +69,18 @@ while row > i:
         port3=4129
         while cou<=maxnumber:
 
-            #如果不需要复制，注释下面if-else代码块
-            if cou==0:
-                command='cp -rf /root/btfs /home/btfs'
-                stdin,stdout,stderr=client.exec_command(command)
-                stdout_result = stdout.readlines()
-                print('copy success')
-            else:
-                command='cp -rf /root/btfs'+str(cou)+' /home/btfs'+str(cou)
-                print(command)
-                stdin,stdout,stderr=client.exec_command(command)
-                stdout_result = stdout.readlines()
-                print('copy success')
+            # #如果不需要复制，注释下面if-else代码块
+            # if cou==0:
+            #     command='cp -rf /root/btfs /home/btfs'
+            #     stdin,stdout,stderr=client.exec_command(command)
+            #     stdout_result = stdout.readlines()
+            #     print('copy success')
+            # else:
+            #     command='cp -rf /root/btfs'+str(cou)+' /home/btfs'+str(cou)
+            #     print(command)
+            #     stdin,stdout,stderr=client.exec_command(command)
+            #     stdout_result = stdout.readlines()
+            #     print('copy success')
 
 
             chan = client.invoke_shell()
