@@ -4,7 +4,6 @@ from time import sleep
 import sys
 import xlrd
 import xlwt
-import pam
 
 i=0
 max_test=3
@@ -45,10 +44,16 @@ while row > i:
                 count =count+1
     if success:
         print('登陆成功')
-        command="sed -i 's/swap-endpoint: https:\/\/rpc.slock.it\/goerli/swap-endpoint: https:\/\/goerli.infura.io\/v3\/cd8135ee2e07404ab7fd85b862c01f59/' /etc/bee/bee.yaml"
+        command="sed -i 's/# swap-endpoint: http:\/\/localhost:8545/swap-endpoint: https:\/\/goerli.infura.io\/v3\/cd8135ee2e07404ab7fd85b862c01f59/' /etc/bee/bee.yaml"
         stdin, stdout, stderr = client.exec_command(command)
         stdout.readlines()
         command='sudo chown -R bee:bee /var/lib/bee'
+        stdin, stdout, stderr = client.exec_command(command)
+        stdout.readlines()
+        command='chown bee-clef /var/lib/bee-clef/clef.ipc'
+        stdin, stdout, stderr = client.exec_command(command)
+        stdout.readlines()
+        command='chgrp bee-clef /var/lib/bee-clef/clef.ipc'
         stdin, stdout, stderr = client.exec_command(command)
         stdout.readlines()
         command='sudo systemctl start bee'
